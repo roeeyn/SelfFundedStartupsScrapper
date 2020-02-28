@@ -20,29 +20,17 @@
 # print(main_list)
 # driver.quit()
 
-import base64
-from selenium import webdriver
+import csv
 
-driver = webdriver.Chrome("./chromedriver")
-driver.get("https://bibliotechnia.com.mx/portal/visor/web/visor.php")
-driver.add_cookie(
-    {
-        "name": "PHPSESSID",
-        "value": "jedt8uf304oon3kufo2kdip123",
-        "domain": "bibliotechnia.com.mx",
-    }
-)
+with open('clean_startups.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    line_count = 0
+    for row in csv_reader:
+        if line_count == 0:
+            print(f'Column names are {", ".join(row)}')
+            line_count += 1
+        else:
+            print(f'\tURL :{row[4]}')
+            line_count += 1
+    print(f'Processed {line_count} lines.')
 
-# canvas = driver.find_element_by_css_selector("#canvas")
-#
-# # get the canvas as a PNG base64 string
-# canvas_base64 = driver.execute_script(
-#     "return arguments[0].toDataURL('image/png').substring(21);", canvas
-# )
-#
-# # decode
-# canvas_png = base64.b64decode(canvas_base64)
-#
-# # save to a file
-# with open(r"canvas.png", "wb") as f:
-#     f.write(canvas_png)
