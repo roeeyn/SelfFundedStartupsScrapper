@@ -36,7 +36,8 @@ with open('clean_startups.csv', 'r+') as csv_file:
             else:
                 print(f'\tURL :{row[4]}, is Self Funded: {row[11]}')
                 row = row[:-1]
-                spamwriter.writerow([*row, 'jeje'])
+                is_self_funded = input('simon? ')
+                spamwriter.writerow([*row, is_self_funded])
                 line_count += 1
     print(f'Processed {line_count} lines.')
 
