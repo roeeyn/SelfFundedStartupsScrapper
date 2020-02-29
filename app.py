@@ -22,15 +22,21 @@
 
 import csv
 
-with open('clean_startups.csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    line_count = 0
-    for row in csv_reader:
-        if line_count == 0:
-            print(f'Column names are {", ".join(row)}')
-            line_count += 1
-        else:
-            print(f'\tURL :{row[4]}, is Self Funded: {row[11]}')
-            line_count += 1
+with open('clean_startups.csv', 'r+') as csv_file:
+    with open('eggs.csv', 'w', newline='') as output_csv_file:
+
+        spamwriter = csv.writer(output_csv_file)
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0 or row[11] != '':
+                print(f'Column names are {", ".join(row)}, {type(row[11])}')
+                spamwriter.writerow([*row])
+                line_count += 1
+            else:
+                print(f'\tURL :{row[4]}, is Self Funded: {row[11]}')
+                row = row[:-1]
+                spamwriter.writerow([*row, 'jeje'])
+                line_count += 1
     print(f'Processed {line_count} lines.')
 
