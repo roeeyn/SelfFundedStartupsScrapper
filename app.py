@@ -30,7 +30,7 @@ with open('clean_startups.csv') as csv_file:
             print(f'Column names are {", ".join(row)}')
             line_count += 1
         else:
-            print(f'\tURL :{row[4]}')
+            print(f'\tURL :{row[4]}, is Self Funded: {row[11]}')
             line_count += 1
     print(f'Processed {line_count} lines.')
 
